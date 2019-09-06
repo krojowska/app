@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "291572059257",
+    "firebase_url": "https://logindata-93dc8.firebaseio.com",
+    "project_id": "logindata-93dc8",
+    "storage_bucket": "logindata-93dc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291572059257:android:18061c8fba860c7f1518a8",
+        "android_client_info": {
+          "package_name": "com.example.app_vol3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291572059257-brk9u8qdbuemn72utahfo06tam3k53df.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiCybhv1OGt3YjKwt37hNBNO1z2i89kJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291572059257-brk9u8qdbuemn72utahfo06tam3k53df.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
