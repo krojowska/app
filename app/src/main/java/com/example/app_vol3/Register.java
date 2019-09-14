@@ -16,7 +16,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity implements View.OnClickListener{
     Button bRegister;
     EditText etName, etYear, etEmail, etPassword;
     private FirebaseAuth firebaseAuth;
@@ -35,41 +35,31 @@ public class Register extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bRegister = (Button) findViewById(R.id.bRegister);
 
-        //bRegister.setOnClickListener(this);
-        bRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(validate()){
-                    String user_email = etEmail.getText().toString().trim();
-                    String user_password = etPassword.getText().toString().trim();
-
-                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Register.this, MainActivity.class));
-                            } else {
-                                Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
-                   // startActivity(new Intent(Register.this, MainActivity.class));
-                }
-            }
-        });
-
+        bRegister.setOnClickListener(this);
     }
-//    @Override
-//    public void onClick(View v) {
-//        switch(v.getId()){
-//            case R.id.bRegister:
-//                startActivity(new Intent(this, MainActivity.class));
-//                break;
-//        }
-//    }
-//
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.bRegister:
+                if(validate()){
+                    firebaseAuth.createUserWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(Register.this, MainActivity.class));
+                                    } else {
+                                        Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
+                break;
+        }
+    }
+
     private Boolean validate() {
         Boolean result = false;
 
