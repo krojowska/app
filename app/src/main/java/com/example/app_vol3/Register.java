@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Register extends AppCompatActivity implements View.OnClickListener{
     Button bRegister;
     EditText etName, etYear, etEmail, etPassword;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth; //wifi must be on
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
