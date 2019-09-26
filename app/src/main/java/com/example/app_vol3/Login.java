@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
-    Button bLogin;
-    EditText etEmail, etPassword;
-    TextView tvRegisterLink;
+    Button loginBtn;
+    EditText emailEt, passwordEt;
+    TextView registerLinkTv;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -31,53 +31,66 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        bLogin = (Button) findViewById(R.id.bLogin);
-        tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
+        emailEt = findViewById(R.id.emailEt);
+        passwordEt = findViewById(R.id.passwordEt);
+        loginBtn = findViewById(R.id.loginBtn);
+        registerLinkTv = findViewById(R.id.registerLinkTv);
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+       // FirebaseUser user = firebaseAuth.getCurrentUser();
 
 //        if (user != null) {
 //            finish();
 //            startActivity(new Intent(Login.this, MainActivity.class));
 //        }
 
-        bLogin.setOnClickListener(this);
-        tvRegisterLink.setOnClickListener(this);
+        loginBtn.setOnClickListener(this);
+        registerLinkTv.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bLogin:
-                 validate(etEmail.getText().toString(), etPassword.getText().toString());
+            case R.id.loginBtn:
+                if(validate()) {
+                    progressDialog.setMessage("Loading ...");
+                    progressDialog.show();
+                    firebaseAuth.signInWithEmailAndPassword(emailEt.getText().toString(), passwordEt.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                progressDialog.dismiss();
+                                Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Login.this, UserData.class));
+                            } else {
+                                progressDialog.dismiss();
+                                Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
                 break;
-            case R.id.tvRegisterLink:
+            case R.id.registerLinkTv:
                 startActivity(new Intent(this, Register.class));
                 break;
         }
     }
 
-    private void validate(String userName, String userPassword) {
-        progressDialog.setMessage("Loading ...");
-        progressDialog.show();
-        firebaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    progressDialog.dismiss();
-                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this, MainActivity.class));
-                } else{
-                    progressDialog.dismiss();
-                    Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+    private Boolean validate() {
+        Boolean result = false;
+
+        String email = emailEt.getText().toString();
+        String password = passwordEt.getText().toString();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(Login.this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+        } else {
+            result = true;
+        }
+        return result;
     }
 }
+

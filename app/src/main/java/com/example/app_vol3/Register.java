@@ -17,8 +17,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
-    Button bRegister;
-    EditText etName, etYear, etEmail, etPassword;
+    Button registerBtn, backBtn;
+    EditText emailEt, passwordEt;
     private FirebaseAuth firebaseAuth; //wifi must be on
 
     @Override
@@ -29,21 +29,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        etName = (EditText) findViewById(R.id.etName);
-        etYear = (EditText) findViewById(R.id.etYear);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        bRegister = (Button) findViewById(R.id.bRegister);
+        emailEt = findViewById(R.id.emailEt);
+        passwordEt = findViewById(R.id.passwordEt);
+        registerBtn = findViewById(R.id.registerBtn);
+        backBtn = findViewById(R.id.backBtn);
 
-        bRegister.setOnClickListener(this);
+        registerBtn.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.bRegister:
+            case R.id.registerBtn:
                 if(validate()){
-                    firebaseAuth.createUserWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
+                    firebaseAuth.createUserWithEmailAndPassword(emailEt.getText().toString(), passwordEt.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -57,18 +57,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                             });
                 }
                 break;
+            case R.id.backBtn:
+                startActivity(new Intent(Register.this, UserData.class));
+                break;
         }
     }
 
     private Boolean validate() {
         Boolean result = false;
 
-        String name = etName.getText().toString();
-        String year = etYear.getText().toString();
-        String email = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
+        String email = emailEt.getText().toString();
+        String password = passwordEt.getText().toString();
 
-        if(name.isEmpty() || year.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if(email.isEmpty() || password.isEmpty()) {
             Toast.makeText(Register.this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }else {
             result = true;

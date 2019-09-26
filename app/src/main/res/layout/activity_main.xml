@@ -4,30 +4,52 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:padding="10dp"
-    tools:context=".Login">
+    tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:text="Name"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etName"
+        android:id="@+id/statusBluetoothTv"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="Email"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:text=""
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
     <Button
-        android:id="@+id/bLogout"
-        android:text="Logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:id="@+id/onBtn"
+        android:text="Turn On"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:id="@+id/offBtn"
+        android:text="Turn Off"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:id="@+id/discoverableBtn"
+        android:text="Discoverable"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:id="@+id/pairedBtn"
+        android:text="Paired Devices"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:id="@+id/logoutBtn"
+        android:text="Logout"/>
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:minWidth="200dp"
+        android:id="@+id/pairedTv"
+        android:textColor="#000"/>
+
 </LinearLayout>

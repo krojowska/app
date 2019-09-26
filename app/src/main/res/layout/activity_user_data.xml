@@ -5,44 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".Login">
+    tools:context=".UserData">
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="App for sick children"
+        android:text="Complete your child's details."
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content" />
     <TextView
         android:layout_width="wrap_content"
-        android:text="Email"
+        android:text="First name"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/emailEt"
+        android:id="@+id/firstNameEt"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content" />
     <TextView
         android:layout_width="wrap_content"
-        android:text="Password"
+        android:text="Last name"
         android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/passwordEt"
+        android:id="@+id/lastNameEt"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:inputType="textPassword"
         android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Date of birth (dd/mm/yyyy,dd-mm-yyyy or dd.mm.yyyy)"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/birthEt"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="PESEL"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/peselEt"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Permanent medicines"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/medicinesEt"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:inputType="text|textMultiLine"
+        android:gravity="top"/>
     <Button
-        android:id="@+id/loginBtn"
-        android:text="Login"
-        android:layout_marginBottom="10dp"
+        android:id="@+id/saveBtn"
+        android:text="Save"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/registerLinkTv"
-        android:layout_width="wrap_content"
-        android:text="You don't have account? Register here"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content" />
 </LinearLayout>
