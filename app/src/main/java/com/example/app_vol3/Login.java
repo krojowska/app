@@ -40,7 +40,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
-       // FirebaseUser user = firebaseAuth.getCurrentUser();
+//        FirebaseUser user = firebaseAuth.getCurrentUser();
+//        user.getUid();
 
 //        if (user != null) {
 //            finish();

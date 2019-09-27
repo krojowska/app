@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
     Button registerBtn, backBtn;
-    EditText emailEt, passwordEt;
+    EditText emailEt, passwordEt, confirmPasswordEt;
     private FirebaseAuth firebaseAuth; //wifi must be on
 
     @Override
@@ -31,6 +31,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         emailEt = findViewById(R.id.emailEt);
         passwordEt = findViewById(R.id.passwordEt);
+        confirmPasswordEt = findViewById(R.id.confirmPasswordEt);
         registerBtn = findViewById(R.id.registerBtn);
         backBtn = findViewById(R.id.backBtn);
 
@@ -68,9 +69,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         String email = emailEt.getText().toString();
         String password = passwordEt.getText().toString();
+        String confirmPassword = confirmPasswordEt.getText().toString();
 
         if(email.isEmpty() || password.isEmpty()) {
             Toast.makeText(Register.this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+        }else if(!password.equals(confirmPassword)) {
+            Toast.makeText(Register.this, "Both passwords must be the same", Toast.LENGTH_SHORT).show();
         }else {
             result = true;
         }

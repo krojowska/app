@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,8 +29,8 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
     public static final String PESEL_KEY = "pesel";
     public static final String MEDICINES_KEY = "medicines";
     public static final String TAG = "UserDetails";
-
-    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("myData/childData");
+    //private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("myData/childData");
+    private FirebaseAuth firebaseAuth;
 
     Button saveBtn;
     EditText firstNameEt, lastNameEt, birthEt, peselEt, medicinesEt;
@@ -37,6 +39,8 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
+
+
 
         firstNameEt = findViewById(R.id.firstNameEt);
         lastNameEt = findViewById(R.id.lastNameEt);
@@ -50,6 +54,11 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        user.getUid();
+        DocumentReference mDocRef = FirebaseFirestore.getInstance().document("myData/"+user.getUid());
+
         switch (v.getId()) {
             case R.id.saveBtn:
                 if (validate()) {
