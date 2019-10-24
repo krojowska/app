@@ -32,7 +32,7 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
     //private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("myData/childData");
     private FirebaseAuth firebaseAuth;
 
-    Button saveBtn;
+    Button saveBtn, mainPageBtn;
     EditText firstNameEt, lastNameEt, birthEt, peselEt, medicinesEt;
 
     @Override
@@ -40,16 +40,16 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
 
-
-
         firstNameEt = findViewById(R.id.firstNameEt);
         lastNameEt = findViewById(R.id.lastNameEt);
         birthEt = findViewById(R.id.birthEt);
         peselEt = findViewById(R.id.peselEt);
         medicinesEt = findViewById(R.id.medicinesEt);
         saveBtn = findViewById(R.id.saveBtn);
+        mainPageBtn = findViewById(R.id.mainPageBtn);
 
         saveBtn.setOnClickListener(this);
+        mainPageBtn.setOnClickListener(this);
     }
 
     @Override
@@ -79,8 +79,10 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
                             Log.d(TAG, "Document was not saved!", e);
                         }
                     });
-                    //startActivity(new Intent(this, MainActivity.class));
                 }
+                break;
+            case R.id.mainPageBtn:
+                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -93,10 +95,8 @@ public class UserData extends AppCompatActivity implements View.OnClickListener 
 
         if (firstName.isEmpty() || lastName.isEmpty() || birth.isEmpty() || pesel.isEmpty()) {
             Toast.makeText(UserData.this, "Please enter all the details", Toast.LENGTH_SHORT).show();
-        } else if (pesel.length() != 11) {
+        } else if (pesel.length() != 11 || !pesel.matches("-?\\d+(\\.\\d+)?")) {
             Toast.makeText(UserData.this, "PESEL should have 11 digits long", Toast.LENGTH_SHORT).show();
-        } else if (!pesel.matches("-?\\d+(\\.\\d+)?")) {
-            Toast.makeText(UserData.this, "PESEL should consider only digits", Toast.LENGTH_SHORT).show();
         } else if (!birth.matches("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$")) {
             Toast.makeText(UserData.this, "Date of birth is incorrect", Toast.LENGTH_SHORT).show();
         } else {

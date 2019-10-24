@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
-    Button registerBtn, backBtn;
+    Button registerBtn, backBtn, userDetailsBtn;
     EditText emailEt, passwordEt, confirmPasswordEt;
     private FirebaseAuth firebaseAuth; //wifi must be on
 
@@ -34,9 +34,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         confirmPasswordEt = findViewById(R.id.confirmPasswordEt);
         registerBtn = findViewById(R.id.registerBtn);
         backBtn = findViewById(R.id.backBtn);
+        userDetailsBtn = findViewById(R.id.userDetailsBtn);
 
         registerBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
+        userDetailsBtn.setOnClickListener(this);
     }
 
     @Override
@@ -59,8 +61,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.backBtn:
-                startActivity(new Intent(Register.this, UserData.class));
+                startActivity(new Intent(Register.this, Login.class));
                 break;
+            case R.id.userDetailsBtn:
+                startActivity(new Intent(Register.this, UserData.class));
+
         }
     }
 

@@ -50,6 +50,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:id="@+id/userDetailsBtn"
+        android:text="User Details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
         android:id="@+id/backBtn"
         android:text="Back"
         android:layout_width="match_parent"
